@@ -1,0 +1,37 @@
+name: Build and Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        device: [x1slte, x1s, y2slte, y2s, z3s, c1slte, c1s, c2slte, c2s, r8s]
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: "Set up build environment"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-core flex bison build-essential zip curl \
+          zlib1g-dev libc6-dev-i386 lib32z1-dev unzip
+
+      - name: "Checkout repository with submodules"
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: "Build for specific device"
+        run: ./build.sh -m ${{ matrix.device }} -k Y -r N
+
+      - name: "Prepare ZIP files for upload"
+        run: |
+          mkdir -p ${{ github.workspace }}/build/out/zip_files
+          find ${{ github.workspace }}/build/out/ -type f -name "*.zip" -exec cp {} ${{ github.workspace }}/build/out/zip_files/ \;
+
+      - name: "Upload ZIP files as artifact"
+        uses: actions/upload-artifact@v4
+        with:
+         name: "ExtremeKRNL-Nexus-GoRhanHee-${{ matrix.device }}"
+         path: ${{ github.workspace }}/build/out/zip_files/
