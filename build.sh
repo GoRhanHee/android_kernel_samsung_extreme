@@ -48,9 +48,6 @@ done
 
 echo "Preparing the build environment..."
 
-# Import Submodule
-git submodule init && git submodule update --remote
-
 pushd $(dirname "$0") > /dev/null
 CORES=`cat /proc/cpuinfo | grep -c processor`
 
