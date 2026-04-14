@@ -1,0 +1,80 @@
+name: Build ExtremeKRNL
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Exynos9820 (Galaxy S10, N10 Series)
+          - chipset: '9820'
+            device: beyond0lte
+          - chipset: '9820'
+            device: beyond1lte
+          - chipset: '9820'
+            device: beyond2lte
+          - chipset: '9820'
+            device: beyondx
+          - chipset: '9820'
+            device: d1
+          - chipset: '9820'
+            device: d1xks
+          - chipset: '9820'
+            device: d2s
+          - chipset: '9820'
+            device: d2x
+          - chipset: '9820'
+            device: d2xks
+
+          # Exynos990 (Galaxy S20, N20 Series)
+          - chipset: '990'
+            device: x1slte
+          - chipset: '990'
+            device: x1s
+          - chipset: '990'
+            device: y2slte
+          - chipset: '990'
+            device: y2s
+          - chipset: '990'
+            device: z3s
+          - chipset: '990'
+            device: c1slte
+          - chipset: '990'
+            device: c1s
+          - chipset: '990'
+            device: c2slte
+          - chipset: '990'
+            device: c2s
+          - chipset: '990'
+            device: r8s
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: "Set up build environment"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-core flex bison build-essential zip curl \
+          zlib1g-dev libc6-dev-i386 lib32z1-dev unzip
+
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.chipset }}
+
+      - name: "Build for specific device"
+        run: ./build.sh -m ${{ matrix.device }} -k Y -r N
+
+      - name: "Prepare ZIP files for upload"
+        run: |
+          mkdir -p ${{ github.workspace }}/build/out/zip_files
+          find ${{ github.workspace }}/build/out/ -type f -name "*.zip" -exec cp {} ${{ github.workspace }}/build/out/zip_files/ \;
+
+      - name: "Upload ZIP files as artifact"
+        uses: actions/upload-artifact@v4
+        with:
+         name: "ExtremeKRNL-GoRhanHee-${{ matrix.chipset }}-${{ matrix.device }}"
+         path: ${{ github.workspace }}/build/out/zip_files/
