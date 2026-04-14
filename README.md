@@ -1,12 +1,16 @@
 # GoRhanHee Kernel for Extreme ROM
 
-* A specialized **Latest KernelSU-Next** integrated kernel optimized specifically for Extreme ROM users. This project supports Samsung Exynos 9820 and 990 lineups, with a primary focus on gaming performance and system stability.
+* A specialized **Latest [KernelSU-Next](https://github.com/rifsxd/KernelSU-Next)** integrated kernel optimized specifically for Extreme ROM users. This project supports Samsung Exynos 9820 and 990 lineups, with a primary focus on gaming performance and system stability.
+
+---
 
 ## 🚀 Features
-* **KernelSU-Next Integration**: Native support for the **latest** kernel-based root solution (KSUN) out of the box.
-* **Extreme ROM Optimization**: Tailored system tuning and scheduler adjustments to maximize ROM performance.
+* **[KernelSU-Next](https://github.com/rifsxd/KernelSU-Next) Integration**: Native support for the **latest** kernel-based root solution (KSUN) out of the box.
+* **[ExtremeROM](https://github.com/ExtremeXT/ExtremeROM) Optimization**: Tailored system tuning and scheduler adjustments to maximize ROM performance.
 * **Gaming Performance**: Prioritizes frame rate stability and thermal management over non-essential features like camera post-processing or high-resolution overhead.
 * **CI/CD Automation**: Regular builds via GitHub Actions ensuring the latest kernel upstreaming and security patches.
+
+---
 
 ## ❗ PREREQUISITE
 
@@ -14,6 +18,8 @@
 
 * **[Extreme ROM v2.6.1](https://github.com/ExtremeXT/ExtremeROM/releases/tag/v2.6.1) must be installed** on your device before flashing this kernel.
 * Flashing this on other ROMs (Stock, LineageOS, etc..) may lead to bootloops or system instability.
+
+---
 
 ## 📱 Supported Devices
 
@@ -27,6 +33,7 @@
 | | Galaxy Note 20 Series | Note 20, Note 20 Ultra |
 | | Galaxy S20 FE | S20 FE |
 
+---
 
 ## 🛠 How to Build
 
@@ -43,6 +50,8 @@ To build in a local environment :
 ```bash
 ./build.sh -m [device_codename] -k Y -r N
 ```
+
+---
 
 ## 🤝 Credits
 
