@@ -1,5 +1,7 @@
 # GoRhanHee Kernel for Extreme ROM
 
+![img](img/banner.png)
+
 * A specialized **Latest [KernelSU-Next](https://github.com/rifsxd/KernelSU-Next)** integrated kernel optimized specifically for Extreme ROM users. This project supports Samsung Exynos 9820 and 990 lineups, with a primary focus on gaming performance and system stability.
 
 ---
